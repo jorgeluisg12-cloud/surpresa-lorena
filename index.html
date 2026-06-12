@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<title>Partilhar — Para Lorena</title>
+<link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+<!-- ===================== AMBIENT AUDIO ===================== -->
+<audio id="bgm" loop preload="auto">
+  <source src="assets/partilhar-rubel.mp3" type="audio/mpeg" />
+</audio>
+
+<audio id="sfx-flip" preload="auto"><source src="assets/sfx-flip.mp3" type="audio/mpeg" /></audio>
+<audio id="sfx-chime" preload="auto"><source src="assets/sfx-chime.mp3" type="audio/mpeg" /></audio>
+<audio id="sfx-unlock" preload="auto"><source src="assets/sfx-unlock.mp3" type="audio/mpeg" /></audio>
+<audio id="voice-secret" preload="none"><source src="assets/voice-secret.mp3" type="audio/mpeg" /></audio>
+<audio id="vault-media" preload="none"><source src="assets/vault-video.mp4" type="video/mp4" /></audio>
+
+<!-- ===================== PROGRESS BAR ===================== -->
+<div class="progress-rail" aria-hidden="true">
+  <div class="progress-fill" id="progressFill"></div>
+</div>
+
+<!-- ===================== MUSIC TOGGLE ===================== -->
+<button class="music-toggle" id="musicToggle" aria-label="Reproduzir música">
+  <span class="music-icon">
+    <span class="bar"></span><span class="bar"></span><span class="bar"></span>
+  </span>
+</button>
+
+<!-- ===================== MEDALS TRAY ===================== -->
+<button class="medals-toggle" id="medalsToggle" aria-label="Ver medalhas">
+  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+    <circle cx="12" cy="8" r="5.5"/>
+    <path d="M8.5 13 7 21l5-2.5L17 21l-1.5-8"/>
+  </svg>
+  <span class="medals-count" id="medalsCount">0</span>
+</button>
+
+<div class="medals-panel" id="medalsPanel">
+  <div class="medals-panel-header">
+    <span>Suas conquistas</span>
+    <button class="medals-close" id="medalsClose" aria-label="Fechar">×</button>
+  </div>
+  <div class="medals-grid" id="medalsGrid"></div>
+</div>
+
+<!-- ===================== TOAST (reward messages) ===================== -->
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+<!-- ===================== MAIN SCROLLER ===================== -->
+<main id="main">
+
+  <!-- ============ SCREEN 0 — SALA DE ESPERA ============ -->
+  <section class="screen screen--intro" id="screen-intro" data-screen="0">
+    <div class="stars" id="stars"></div>
+    <div class="intro-content">
+      <p class="intro-line intro-line--1">Algumas histórias precisam de silêncio para começar.</p>
+      <p class="intro-line intro-line--2">Esta é uma delas. E você está nela.</p>
+      <button class="btn-enter" id="btnEnter">
+        <span>Começar</span>
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M5 12h14M13 6l6 6-6 6"/>
+        </svg>
+      </button>
+    </div>
+    <div class="intro-credit">23 . 12 . 2025 — Partilhar, Rubel</div>
+  </section>
+
+  <!-- ============ SCREEN 1 — O PONTO ZERO ============ -->
+  <section class="screen screen--chapter" id="screen-1" data-screen="1">
+    <div class="chapter-eyebrow">Capítulo I</div>
+    <h1 class="chapter-title chapter-title--date">23<span class="dot">.</span>12<span class="dot">.</span>2025</h1>
+    <div class="reveal-block">
+      <p class="display-text">Antes disso, havia uma vida inteira.</p>
+      <p class="display-text">Depois disso, havia outra coisa.</p>
+      <p class="display-text display-text--em">Melhor.</p>
+    </div>
+
+    <!-- COUNTER -->
+    <div class="counter-card" id="counterCard">
+      <div class="counter-label">Há quanto tempo nós dois existimos</div>
+      <div class="counter-grid">
+        <div class="counter-unit"><span class="counter-num" id="cDays">0</span><span class="counter-tag">dias</span></div>
+        <div class="counter-unit"><span class="counter-num" id="cHours">0</span><span class="counter-tag">horas</span></div>
+        <div class="counter-unit"><span class="counter-num" id="cMin">0</span><span class="counter-tag">min</span></div>
+        <div class="counter-unit"><span class="counter-num" id="cSec">0</span><span class="counter-tag">seg</span></div>
+      </div>
+    </div>
+
+    <div class="timeline-mini" aria-hidden="true">
+      <div class="timeline-mini-line"></div>
+      <div class="timeline-mini-point timeline-mini-point--active"></div>
+    </div>
+    <button class="scroll-cue" data-next="screen-2" aria-label="Continuar">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 5v14M5 12l7 7 7-7"/></svg>
+    </button>
+  </section>
+
+  <!-- ============ SCREEN 2 — ANTES DE VOCÊ ============ -->
+  <section class="screen screen--chapter" id="screen-2" data-screen="2">
+    <div class="chapter-eyebrow">Antes de você</div>
+    <div class="reveal-block">
+      <p class="display-text">Tem gente que vive esperando sem saber pelo que espera.</p>
+      <p class="display-text display-text--em">Eu não sabia que faltava alguém — só sabia que faltava algo.</p>
+    </div>
+
+    <!-- SILENCE BEAT — pure pause, no text -->
+    <div class="silence-beat" aria-hidden="true">
+      <span class="silence-dot"></span>
+    </div>
+
+    <div class="reveal-block reveal-block--delay">
+      <p class="display-text">23 de novembro. Dois anos te conhecendo de longe. Um jantar no Jaboticaba.</p>
+      <p class="display-text display-text--bold">Saí diferente. Trinta dias depois, eu já sabia.</p>
+    </div>
+    <button class="scroll-cue" data-next="screen-3" aria-label="Continuar">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 5v14M5 12l7 7 7-7"/></svg>
+    </button>
+  </section>
+
+  <!-- ============ SCREEN 3 — O MOMENTO (interativo) ============ -->
+  <section class="screen screen--chapter screen--constellation" id="screen-3" data-screen="3">
+    <div class="chapter-eyebrow">O momento</div>
+    <canvas id="constellation"></canvas>
+    <div class="constellation-hint" id="constellationHint">Toque e desenhe</div>
+    <div class="reveal-block">
+      <p class="display-text">Imperatriz. Natal em família.</p>
+      <p class="display-text">Eu não conseguiria te apresentar ao que tenho de mais importante sem antes ter certeza do que nós éramos.</p>
+      <p class="display-text display-text--bold">Então te pedi em namoro. Antes da viagem. De propósito.</p>
+    </div>
+
+    <!-- Hidden letter, revealed after dwell -->
+    <div class="hidden-letter" id="hiddenLetter">
+      <div class="hidden-letter-tag">✦ carta encontrada</div>
+      <p>Enquanto planejava o pedido, eu já tinha começado a esboçar nossa primeira viagem juntos — sem te contar.</p>
+      <p>Uma parte de mim já construía "nós" antes de saber se você toparia.</p>
+    </div>
+
+    <button class="scroll-cue" data-next="screen-4" aria-label="Continuar">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 5v14M5 12l7 7 7-7"/></svg>
+    </button>
+  </section>
+
+  <!-- ============ SCREEN 4 — O QUE EU APRENDI (flashcards) ============ -->
+  <section class="screen screen--chapter" id="screen-4" data-screen="4">
+    <div class="chapter-eyebrow">Capítulo II</div>
+    <h2 class="chapter-title">O que eu aprendi</h2>
+    <div class="reveal-block">
+      <p class="display-text">Tem gente que você aprende em um dia.</p>
+      <p class="display-text">E tem gente que você passa a vida aprendendo.</p>
+      <p class="display-text display-text--em">Você é a segunda. E eu não tenho pressa nenhuma.</p>
+    </div>
+
+    <div class="flash-hint">Toque nas fichas para virar</div>
+    <div class="flash-grid" id="flashGrid">
+      <!-- cards injected by JS -->
+    </div>
+
+    <button class="scroll-cue" data-next="screen-5" aria-label="Continuar">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 5v14M5 12l7 7 7-7"/></svg>
+    </button>
+  </section>
+
+  <!-- ============ SCREEN 5 — PORTAL DE ESCOLHA ============ -->
+  <section class="screen screen--portal" id="screen-5" data-screen="5">
+    <div class="chapter-eyebrow">Escolha seu caminho</div>
+    <h2 class="chapter-title">Por onde você quer começar?</h2>
+    <div class="portal-grid">
+      <button class="portal-card" data-portal="a">
+        <span class="portal-tag">Porta A</span>
+        <span class="portal-name">O que você ama</span>
+        <span class="portal-desc">Sushi. Paralamas. Estudo até tarde. Família em primeiro lugar.</span>
+      </button>
+      <button class="portal-card" data-portal="b">
+        <span class="portal-tag">Porta B</span>
+        <span class="portal-name">O que eu amo em você</span>
+        <span class="portal-desc">Os olhos. O cuidado. A presença que acalma.</span>
+      </button>
+    </div>
+
+    <!-- Portal A content -->
+    <div class="portal-content" id="portalA">
+      <div class="reveal-block">
+        <p class="display-text">Sushi. Paralamas tocando na praia, dez milhões de pessoas — e parecia que era só pra nós.</p>
+        <p class="display-text display-text--bold">Você estuda até tarde porque ama o que faz. E no centro de tudo: família. Não obrigação. Pertencimento.</p>
+      </div>
+    </div>
+
+    <!-- Portal B content -->
+    <div class="portal-content" id="portalB">
+      <div class="reveal-block">
+        <p class="display-text">Seus olhos chegam antes de você. Dizem algo antes de qualquer palavra.</p>
+        <p class="display-text display-text--bold">Sua presença acalma. Não é clima, não é sorte. É você.</p>
+      </div>
+    </div>
+
+    <button class="scroll-cue" data-next="screen-7" aria-label="Continuar">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 5v14M5 12l7 7 7-7"/></svg>
+    </button>
+  </section>
+
+  <!-- ============ SCREEN 7 — NÓS (linha do tempo) ============ -->
+  <section class="screen screen--chapter" id="screen-7" data-screen="7">
+    <div class="chapter-eyebrow">Capítulo III</div>
+    <h2 class="chapter-title">Nós</h2>
+    <div class="reveal-block">
+      <p class="display-text">Tem um momento em Salvador que eu não esqueço. Réveillon. Fogos no céu. Uma multidão inteira contando junto. E no meio de tudo isso, eu te beijei.</p>
+      <p class="display-text">Depois, no Uber, no meio da madrugada, em uma cidade que não era a nossa, você simplesmente confiou. Sem perguntar nada. Sem precisar. E eu pensei, com uma clareza que não esperava:</p>
+      <p class="display-text display-text--em display-text--big">é essa mulher que eu quero do meu lado.</p>
+    </div>
+
+    <!-- Animated timeline -->
+    <div class="timeline" id="timeline">
+      <div class="timeline-track"></div>
+      <div class="timeline-progress" id="timelineProgress"></div>
+      <!-- nodes injected by JS -->
+    </div>
+
+    <button class="scroll-cue" data-next="screen-gallery" aria-label="Continuar">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 5v14M5 12l7 7 7-7"/></svg>
+    </button>
+  </section>
+
+  <!-- ============ GALLERY ============ -->
+  <section class="screen screen--gallery" id="screen-gallery" data-screen="gallery">
+    <div class="chapter-eyebrow">Galeria</div>
+    <h2 class="chapter-title">Registros</h2>
+    <p class="gallery-sub">Toque em uma imagem para ver maior.</p>
+    <div class="gallery-grid" id="galleryGrid"></div>
+
+    <button class="scroll-cue" data-next="screen-8" aria-label="Continuar">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 5v14M5 12l7 7 7-7"/></svg>
+    </button>
+  </section>
+
+  <!-- Lightbox -->
+  <div class="lightbox" id="lightbox">
+    <button class="lightbox-close" id="lightboxClose" aria-label="Fechar">×</button>
+    <img id="lightboxImg" src="" alt="" />
+    <p class="lightbox-caption" id="lightboxCaption"></p>
+  </div>
+
+  <!-- ============ SCREEN 8 — O COFRE ============ -->
+  <section class="screen screen--vault" id="screen-8" data-screen="8">
+    <div class="chapter-eyebrow">O cofre</div>
+    <div class="reveal-block">
+      <p class="display-text display-text--em">Tem coisas que a gente guarda. Não porque são segredo — mas porque são raras demais para se gastar no dia a dia.</p>
+    </div>
+
+    <div class="vault" id="vault">
+      <div class="vault-door" id="vaultDoor">
+        <svg class="vault-icon" width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2">
+          <rect x="3" y="11" width="18" height="10" rx="1"/>
+          <path d="M7 11V8a5 5 0 0 1 10 0v3"/>
+          <circle cx="12" cy="16" r="1.5"/>
+        </svg>
+        <p class="vault-prompt">Você sabe o que abre isso.</p>
+        <div class="vault-input-row">
+          <input type="text" id="vaultInput" class="vault-input" placeholder="Digite aqui" autocomplete="off" />
+          <button class="vault-submit" id="vaultSubmit" aria-label="Abrir">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+          </button>
+        </div>
+        <p class="vault-error" id="vaultError"></p>
+      </div>
+
+      <div class="vault-content" id="vaultContent">
+        <p class="vault-pre">Eu disse que precisamos de pelo menos 40 anos para compartilhar a vida.<br>Isso aqui é o começo da conta.</p>
+        <div class="vault-media-frame">
+          <video id="vaultVideo" controls playsinline poster="assets/vault-poster.jpg">
+            <source src="assets/vault-video.mp4" type="video/mp4" />
+          </video>
+        </div>
+      </div>
+    </div>
+
+    <button class="scroll-cue" data-next="screen-9" aria-label="Continuar">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 5v14M5 12l7 7 7-7"/></svg>
+    </button>
+  </section>
+
+  <!-- ============ SCREEN 9 — DEPOIS ============ -->
+  <section class="screen screen--chapter screen--dawn" id="screen-9" data-screen="9">
+    <div class="chapter-eyebrow">Capítulo IV</div>
+    <h2 class="chapter-title">Depois</h2>
+    <div class="reveal-block">
+      <p class="display-text display-text--bold">Eu não vou prometer um roteiro. Vou te contar o que eu quero.</p>
+      <p class="display-text">Casados, daqui a um ano, sem distância para dividir. Passos pequenos correndo pela casa, daqui a cinco. Uma família com Deus no centro — alicerçada no que já decidimos que importa.</p>
+    </div>
+
+    <!-- SILENCE BEAT -->
+    <div class="silence-beat" aria-hidden="true">
+      <span class="silence-dot"></span>
+    </div>
+
+    <div class="reveal-block reveal-block--delay">
+      <p class="display-text display-text--em">Você me ensinou a ouvir com atenção. Sem dar aula. E isso eu levo para sempre.</p>
+    </div>
+
+    <!-- Future timeline -->
+    <div class="future-line" aria-hidden="true">
+      <div class="future-line-track"></div>
+      <div class="future-line-point future-line-point--pulse"></div>
+      <span class="future-line-label">o que vem — em branco</span>
+    </div>
+
+    <button class="scroll-cue" data-next="screen-quiz" aria-label="Continuar">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 5v14M5 12l7 7 7-7"/></svg>
+    </button>
+  </section>
+
+  <!-- ============ QUIZ ============ -->
+  <section class="screen screen--quiz" id="screen-quiz" data-screen="quiz">
+    <div class="chapter-eyebrow">Quiz</div>
+    <h2 class="chapter-title">O quanto você lembra de nós?</h2>
+    <div class="quiz-wrap" id="quizWrap"></div>
+    <button class="scroll-cue" id="quizContinue" data-next="screen-reasons" aria-label="Continuar" style="display:none;">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 5v14M5 12l7 7 7-7"/></svg>
+    </button>
+  </section>
+
+  <!-- ============ 23 MOTIVOS ============ -->
+  <section class="screen screen--reasons" id="screen-reasons" data-screen="reasons">
+    <div class="chapter-eyebrow">23 motivos</div>
+    <h2 class="chapter-title">23 motivos para amar Lorena</h2>
+    <p class="reasons-sub">Toque na seta para ver o próximo.</p>
+    <div class="reasons-card" id="reasonsCard">
+      <div class="reasons-number" id="reasonsNumber">1</div>
+      <p class="reasons-text" id="reasonsText"></p>
+      <div class="reasons-nav">
+        <button class="reasons-btn" id="reasonsPrev" aria-label="Anterior">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+        </button>
+        <div class="reasons-dots" id="reasonsDots"></div>
+        <button class="reasons-btn" id="reasonsNext" aria-label="Próximo">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        </button>
+      </div>
+    </div>
+    <button class="scroll-cue" data-next="screen-final" aria-label="Continuar">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 5v14M5 12l7 7 7-7"/></svg>
+    </button>
+  </section>
+
+  <!-- ============ FINAL — CARTA E ENCERRAMENTO ============ -->
+  <section class="screen screen--final" id="screen-final" data-screen="final">
+    <div class="chapter-eyebrow">Carta final</div>
+
+    <div class="letter" id="letter">
+      <p class="letter-greeting">Lorena.</p>
+      <p>Você não estava esperando isso. Eu sei.</p>
+      <p>Mas eu queria — com tempo, com cuidado, com tudo o que eu sei sobre você — te mostrar o que é ter você na minha vida.</p>
+      <p>Você lembra que, há pouco tempo, dizia que nunca falava "eu te amo"? Hoje você diz três vezes seguidas, sem pensar duas vezes. Eu vi essa mudança acontecer. E não é pequena.</p>
+      <p>Cada coisa que está nessa experiência — o riso, o jeito de cuidar, os olhos, a viagem de Réveillon, o Uber de madrugada, a senha do cofre — não são só lembranças. São provas de que, desde aquele show no Araguaia, eu venho prestando atenção. Em tudo.</p>
+      <p>Eu disse uma vez que precisamos de pelo menos 40 anos para compartilhar a vida. Não falei por acaso. Quero casar, quero a casa, quero o som de passos pequenos correndo por ela. E quero ser, para você, o tipo de homem que você possa apontar e dizer: esse aqui é exemplo.</p>
+      <p class="letter-em">Você me ensinou a ouvir com atenção. Isso, sozinho, já valeria a experiência inteira.</p>
+      <p class="letter-bold">Não é pouco. É tudo.</p>
+      <p class="letter-sign">Te amo mil milhões.<br><strong>— J.</strong></p>
+    </div>
+
+    <!-- Mosaic / invisible collection -->
+    <div class="mosaic" id="mosaic">
+      <div class="mosaic-item" data-symbol="23">23</div>
+      <div class="mosaic-item" data-symbol="sushi">🍣</div>
+      <div class="mosaic-item" data-symbol="star">✦</div>
+      <div class="mosaic-item" data-symbol="book">📖</div>
+      <div class="mosaic-item" data-symbol="heart">♡</div>
+      <div class="mosaic-item" data-symbol="wave">〜</div>
+    </div>
+
+    <div class="final-date">23/12/2025 →</div>
+
+    <!-- Mirror easter egg -->
+    <button class="mirror-trigger" id="mirrorTrigger">e você?</button>
+    <div class="mirror-overlay" id="mirrorOverlay">
+      <video id="mirrorVideo" autoplay playsinline muted></video>
+      <p class="mirror-text">É isso que ele vê.</p>
+      <button class="mirror-close" id="mirrorClose">Fechar</button>
+    </div>
+
+    <p class="final-credit">Roteiro: Partilhar · escrito por Jorge para Lorena Lima</p>
+  </section>
+
+</main>
+
+<script src="script.js"></script>
+</body>
+</html>
