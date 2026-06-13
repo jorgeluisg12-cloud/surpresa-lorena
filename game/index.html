@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover" />
+  <title>De Parauapebas até Você ❤️</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Quicksand:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <div id="game-container">
+
+    <canvas id="game"></canvas>
+
+    <!-- Tela inicial -->
+    <div id="screen-menu" class="screen">
+      <div class="title-card">
+        <div class="title-heart">❤️</div>
+        <h1>De Parauapebas até Você</h1>
+        <div id="intro-text" class="intro-text"></div>
+        <button id="btn-start" class="btn-primary" style="display:none;">Começar</button>
+      </div>
+    </div>
+
+    <!-- Placa de capítulo -->
+    <div id="chapter-banner" class="chapter-banner hidden">
+      <div class="sign">
+        <div class="sign-name" id="chapter-name"></div>
+      </div>
+    </div>
+
+    <!-- Caixa de diálogo / mensagens -->
+    <div id="message-box" class="message-box hidden">
+      <p id="message-text"></p>
+    </div>
+
+    <!-- Toast de conquistas -->
+    <div id="achievement-toast" class="achievement-toast hidden">
+      <span id="achievement-icon">🏆</span>
+      <div>
+        <div class="achievement-title">Conquista desbloqueada!</div>
+        <div id="achievement-name" class="achievement-name"></div>
+      </div>
+    </div>
+
+    <!-- Modal de memória -->
+    <div id="memory-modal" class="modal hidden">
+      <div class="memory-card">
+        <div class="memory-icon">💌</div>
+        <h2 id="memory-title"></h2>
+        <p id="memory-text"></p>
+        <button id="btn-memory-close" class="btn-secondary">Guardar essa lembrança</button>
+      </div>
+    </div>
+
+    <!-- Tela final -->
+    <div id="screen-final" class="screen hidden">
+      <div class="title-card">
+        <div class="title-heart">💞</div>
+        <h2 id="final-message"></h2>
+
+        <div id="music-block">
+          <button id="btn-music" class="btn-primary">▶ Tocar "Partilhar - Rubel"</button>
+          <p id="music-hint" class="hint"></p>
+        </div>
+
+        <div id="easter-egg-summary" class="hint"></div>
+
+        <h3>Conquistas</h3>
+        <div id="achievements-list" class="achievements-list"></div>
+
+        <button id="btn-replay" class="btn-secondary">Reviver a jornada</button>
+      </div>
+    </div>
+
+    <!-- Controles mobile -->
+    <div id="controls" class="controls hidden">
+      <button id="btn-left" class="ctrl-btn" aria-label="Esquerda">◀</button>
+      <button id="btn-jump" class="ctrl-btn ctrl-jump" aria-label="Pular">⤴</button>
+      <button id="btn-right" class="ctrl-btn" aria-label="Direita">▶</button>
+    </div>
+
+  </div>
+
+  <audio id="bg-music" loop preload="none"></audio>
+
+  <script src="config.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>
